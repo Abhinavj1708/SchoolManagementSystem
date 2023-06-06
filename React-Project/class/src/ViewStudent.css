@@ -1,0 +1,23 @@
+body {
+  margin: 0px;
+  background-image: url('C:\Users\Asus\OneDrive\Desktop\Synclovis\WebDev\React-Project\login-registration\public\image.jpg');
+  background-size: cover;
+  color: aliceblue;
+}
+a{
+  color: aliceblue;
+}
+table thead th td{ color: white; font-size:10pt; }
+.card {
+  backdrop-filter: blur(5px);
+  background-color: rgba(230, 215, 215, 0.3);
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 80%;
+  }
+}

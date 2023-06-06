@@ -1,0 +1,255 @@
+STUDENT
+
+student id
+first_name
+last_name
+father's_name
+roll_no
+class_id (Reference to class table)
+address
+mail
+Phone_no
+is_active (YES/NO) - SOFT DELETE (inactivated)
+is_deleted (YES/NO) - SOFT DELETE (removed from school)
+added_on or created_on (DATE)
+updated_on (DATE)
+
+CREATE TABLE Students (
+    StudentID int PRIMARY KEY AUTO_INCREMENT,
+    FirstName varchar(255),
+    LastName varchar(255),
+    FatherName varchar(255),
+    RollNo int,
+    ClassID int,
+    Address varchar(255),
+    Mail varchar(255),
+    PhoneNo Bigint(12),
+    is_active bit,
+    is_deleted bit,
+    created_on datetime DEFAULT now(),
+    updated_on datetime,
+    FOREIGN KEY(ClassID) REFERENCES Class(ClassID) ON DELETE CASCADE
+)AUTO_INCREMENT = 301;
+
+__________________________________________________________________________________________
+CLASS 
+
+class_id
+class_name
+section_name
+is_active (YES/NO) - SOFT DELETE (inactivated)
+is_deleted (YES/NO) - SOFT DELETE (removed from school)
+added_on or created_on (DATE)
+updated_on (DATE)
+
+CREATE TABLE Class (
+    ClassID int PRIMARY KEY AUTO_INCREMENT,
+    ClassName varchar(255),
+    SectionName varchar(255),
+    is_active bit,
+    is_deleted bit,
+    created_on datetime DEFAULT now(),
+    updated_on datetime
+) AUTO_INCREMENT = 101;
+__________________________________________________________________________________________
+
+TEACHERS
+
+teacher_id
+teacher_name
+age
+address
+email
+phone_no
+qualifiication
+salary
+is_active (YES/NO) - SOFT DELETE (inactivated)
+is_deleted (YES/NO) - SOFT DELETE (removed from school)
+added_on or created_on (DATE)
+updated_on (DATE)
+
+CREATE TABLE Teachers (
+    TeacherID int PRIMARY KEY AUTO_INCREMENT,
+    TeacherName varchar(255),
+    Age int,
+    Address varchar(255),
+    Mail varchar(255),
+    PhoneNo Bigint(12),
+    Qualification varchar(255),
+    Salary int,
+    is_active bit,
+    is_deleted bit,
+    created_on datetime DEFAULT now(),
+    updated_on datetime
+)AUTO_INCREMENT = 501;
+__________________________________________________________________________________
+
+CLASS TEACHER
+
+id
+class_id
+teacher_id
+is_active (YES/NO) - SOFT DELETE (inactivated)
+is_deleted (YES/NO) - SOFT DELETE (removed from school)
+added_on or created_on (DATE)
+updated_on (DATE)
+
+CREATE TABLE ClassTeacher (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    ClassID int,
+    TeacherID int,
+    is_active bit,
+    is_deleted bit,
+    created_on datetime DEFAULT now(),
+    updated_on datetime,
+    FOREIGN KEY(ClassID) REFERENCES Class(ClassID) ON DELETE CASCADE,
+    FOREIGN KEY(TeacherID) REFERENCES Teachers(TeacherID) ON DELETE CASCADE
+)AUTO_INCREMENT = 701;
+
+___________________________________________________________________________________________________
+
+
+
+
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (1, "A", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (1, "B", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (2, "A", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (2, "B", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (2, "C", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (2, "D", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (3, "A", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (3, "B", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (3, "C", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (4, "A", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (4, "B", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (5, "A", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (5, "B", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (5, "C", 1, 0);
+INSERT INTO Class(ClassName, SectionName, is_active, is_deleted) VALUES (5, "D", 1, 0);
+
+
+
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (201, "Atif", 25, "abc", "atif@gmail.com", 1234567890, "aaa", 1000000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (202, "Sathisha", 30, "bcd", "sathisha@gmail.com", 1234567890, "bbb", 1200000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (203, "Aditya", 25, "cde", "aditya@gmail.com", 4591561625, "ccc", 900000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (204, "Sachin", 27, "def", "sachin@gmail.com", 9514782360, "ddd", 800000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (205, "Prashant", 28, "efg", "prashant@gmail.com", 1951982590, "eee", 1100000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (206, "Akhand", 32, "fgh", "akhand@gmail.com", 2345678910, "fff", 950000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (207, "Ranveer", 23, "ghi", "ranveer@gmail.com", 5154119292, "ggg", 900000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (208, "Deepika", 25, "hij", "deepika@gmail.com", 7894561230, "hhh", 1300000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (209, "Pankaj", 29, "ijk", "pankaj@gmail.com", 4567891230, "iii", 1100000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (210, "Amit", 40, "jkl", "amit@gmail.com", 1597532580, "jjj", 1500000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (211, "Riya", 41, "klm", "riya@gmail.com", 1047258369, "kkk", 700000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (212, "Arif", 40, "lmn", "arif@gmail.com", 7410852963, "lll", 750000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (213, "Prince", 29, "mno", "prince@gmail.com", 9512583578, "mmm", 800000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (214, "Tanya", 27, "nop", "tanya@gmail.com", 2583691478, "nnn", 900000, 1, 0);
+INSERT INTO Teachers(TeacherID, TeacherName, Age, Address, Mail, PhoneNo, Qualification, Salary, is_active, is_deleted) VALUES (215, "Atul", 25, "opq", "atul@gmail.com", 2648155948, "ooo", 900000, 1, 0);
+
+
+
+
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Abhinav", "Jaiswal", "abc", 1, 101, "aaa", "abhinav@gmail.com", 8957058660, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Ishita", "Gupta", "bcd", 2, 101, "bbb", "ishita@gmail.com", 1234567890, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Sneha", "Jayshri", "cde", 2, 102, "ccc", "sneha@gmail.com", 2345678910, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Aditya", "Aggarwal", "def", 1, 102, "ddd", "aditya@gmail.com", 9819819829, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Vanshit", "Kandoi", "efg", 2, 103, "eee", "vanshit@gmail.com", 9595928281, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Sambhav", "Mahajan", "fgh", 1, 103, "fff", "sambhav@gmail.com", 5519198298, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Jay", "Yadav", "ghi", 2, 104, "ggg", "jay@gmail.com", 4198198199, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Harsh", "Kashyap", "hij", 1, 104, "hhh", "harsh@gmail.com", 9598199598, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Shikhar", "Gupta", "ijk", 2, 105, "iii", "shikhar@gmail.com", 9393628885, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Abhishek", "Kumar", "jkl", 1, 105, "jjj", "abhishek@gmail.com", 9928171778, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Shivam", "Singh", "klm", 2, 106, "kkk", "shivam@gmail.com", 5619819817, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Harshit", "Bajoria", "lmn", 1, 106, "lll", "harshit@gmail.com", 9189198516, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Aashirvad", "Singh", "mno", 1, 107, "mmm", "aashirvad@gmail.com", 3628293982, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Divyanshu", "Upadhyay", "nop", 2, 107, "nnn", "divyanshu@gmail.com", 9582933848, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Akash", "Mishra", "opq", 1, 108, "ooo", "akash@gmail.com", 1618616805, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Tanya", "Soni", "pqr", 2, 108, "ppp", "tanya@gmail.com", 7181829399, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Shivangini", "Singh", "qrs", 2, 109, "qqq", "shivangini@gmail.com", 9592827198, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Anjanli", "Jaiswal", "rst", 1, 109, "rrr", "anjali@gmail.com", 8165165065, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Jannat", "Afaque", "stu", 2, 110, "sss", "jannat@gmail.com", 8498168167, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Namra", "Fatima", "tuv", 1, 110, "ttt", "namra@gmail.com", 5511560658, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Shakti", "Pandey", "uvw", 2, 111, "uuu", "shakti@gmail.com", 9419165812, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Amit", "Yadav", "vwx", 1, 111, "vvv", "amit@gmail.com", 9985295992, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Shreyans", "Shah", "wxy", 1, 112, "www", "shreyans@gmail.com", 9582817157, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Varnit", "Goel", "xyz", 2, 112, "xxx", "varnit@gmail.com", 6516516517, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Kartikey", "Matolia", "yza", 2, 113, "yyy", "kartikey@gmail.com", 6516503205, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Naman", "Chopra", "zza", 1, 113, "zzz", "naman@gmail.com", 6516565229, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Anshdeep", "Kapula", "zaa", 2, 114, "zaz", "anshdeep@gmail.com", 5165165256, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Vaibhav", "Makhlova", "zab", 1, 114, "zbz", "vaibhav@gmail.com", 9849165515, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Aman", "Verma", "zac", 1, 115, "zcz", "aman@gmail.com", 5419851658, 1, 0);
+INSERT INTO Students(FirstName, LastName, FatherName, RollNo, ClassID, Address, Mail, PhoneNo, is_active, is_deleted) VALUES ("Aditi", "Parashar", "zad", 2, 115, "zdz", "aditi@gmail.com", 1472583578, 1, 0);
+
+
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (101, 501, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (102, 502, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (103, 503, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (104, 504, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (105, 505, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (106, 506, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (107, 507, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (108, 508, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (109, 509, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (110, 510, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (111, 511, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (112, 512, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (113, 513, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (114, 514, 1, 0);
+INSERT INTO classteacher(ClassID, TeacherID, is_active, is_deleted) VALUES (115, 515, 1, 0);
+
+______________________________________________________________________________________________________
+
+
+Triggers
+
+
+
+DELIMITER //
+CREATE TRIGGER preventDeleteClassDueToStudent BEFORE DELETE ON class
+FOR EACH ROW
+BEGIN
+    DECLARE childCount INT;
+    SELECT COUNT(*) INTO childcount FROM students WHERE ClassID = OLD.ClassID;
+    IF childcount > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot delete the class record since it has related records in students table.';
+    END IF;
+END//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE TRIGGER preventInsert BEFORE INSERT ON students
+FOR EACH ROW
+BEGIN
+    DECLARE childCount INT;
+    SELECT COUNT(*) INTO childcount FROM students WHERE New.Mail = Mail;
+    IF childcount > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert the student record since he/she has already been enrolled in students table.';
+    END IF;
+END//
+DELIMITER ;
+
+______________________________________________________________________________________________________________________________
+
+JOIN
+
+
+1. Count the number of students in each class
+
+SELECT Class.ClassName, Class.SectionName, COUNT(Students.StudentID) AS NumberOfStudents
+FROM Class
+LEFT JOIN Students ON Class.ClassID = Students.ClassID where Class.is_deleted=0 
+GROUP BY Class.ClassID;
+
+2. Class teacher is assigned to which class
+
+SELECT CT.TeacherID, T.TeacherName, CT.ClassID, C.ClassName, C.SectionName
+FROM ClassTeacher CT
+JOIN Class C ON CT.ClassID = C.ClassID
+JOIN Teachers T ON CT.TeacherID = T.TeacherID;
+
+
+3. List of students with their class name
+
+SELECT S.FirstName, S.LastName , C.ClassName, C.SectionName 
+FROM Students S 
+JOIN Class C ON S.ClassID = C.ClassID ;

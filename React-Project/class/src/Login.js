@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.css";
-import axios from "axios";
 
 const Login = () => {
   const history = useNavigate();
@@ -36,10 +35,18 @@ const Login = () => {
         email: email,
         password: password,
       };
-      const response = await axios.post(
-        "http://localhost:5000/login", formData
-      );
-      const data = response.data;
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+        credentials: "include",
+        body: JSON.stringify(formData)
+      })
+
+      // const response = await axios.post(
+      //   "http://localhost:5000/login", formData
+      // );
+
+      const data = await response.json();
       if (response.status === 200) {
         alert(data.message);
         if (data.message === "Authentication successful") {

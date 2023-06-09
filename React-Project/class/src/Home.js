@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
-import axios from "axios";
+// import axios from "axios";
 
 const Home = () => {
   const history = useNavigate();
@@ -24,8 +24,13 @@ const Home = () => {
   });
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/logout");
-      const data = response.data;
+      const response = await fetch("http://localhost:5000/logout", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      const data = await response.json();
       if (response.status === 200) {
         alert(data.message);
         if (data.message === "Logout successful") {

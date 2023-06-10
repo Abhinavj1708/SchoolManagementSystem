@@ -7,6 +7,7 @@ import RegisterTeacher from "./RegisterTeacher";
 import Home from "./Home";
 import Register from "./Register";
 import Login from "./Login";
+import ModifyTeacher from "./ModifyTeacher";
 
 const App = () => {
   return ( 
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/registerTeacher" element={<RegisterTeacher />} />
         <Route path="/viewStudent" element={<ViewStudent />} />
         <Route path="/viewTeacher" element={<ViewTeacher />} />
+        <Route path="/modifyTeacher/:id" element={<ModifyTeacher />} />
       </Routes>
     </BrowserRouter>
   );

@@ -103,7 +103,7 @@ app.post("/registerTeacher", async (req, res) => {
       res.status(200).json({ message: "Email already exists" });
       return;
     } else {
-      console.log(req.body);
+      // console.log(req.body);
       const teacherData = req.body;
       const newTeacher = new teacherForm(teacherData);
       await newTeacher.save();
@@ -217,8 +217,6 @@ app.post("/login", async (req, res) => {
     const user = await form.findOne({
       $or: [{ email: usernameOrEmail }, { username: usernameOrEmail }],
     });
-    // console.log(req.body);
-    // console.log(usernameOrEmail, pass);
     if (user) {
       const passwordMatch = await bcrypt.compare(pass, user.password);
       if (passwordMatch) {
@@ -228,7 +226,7 @@ app.post("/login", async (req, res) => {
         res.cookie("access_token", token, {
           httpOnly: true,
           secure: process.env.SECURE,
-          maxAge: 5 * 60 * 1000,
+          maxAge: 20 * 60 * 1000,
         });
 
         res
@@ -255,15 +253,13 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/records", async (req, res) => {
-  const recordId = req.body.data;
-  console.log("wrubfeirhv ");
-  console.log(recordId);
+app.post("/deleteRecord", async (req, res) => {
+  const teacherId = req.body.teacherId;
+  // const teacher = await teacherForm.findById(teacherId);
+  // console.log(teacher)
 
   try {
-    // Find the record by its ID and remove it
-    const result = await teacherForm.findByIdAndRemove(recordId);
-
+    const result = await teacherForm.findByIdAndRemove(teacherId);
     if (result) {
       res.json({ message: "Record deleted successfully" });
     } else {
@@ -274,6 +270,28 @@ app.post("/records", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+app.post("/teacher", async (req, res) => {
+  const teacherId = req.body.id; // true
+  var myquery = { id: + teacherId};
+  console.log(teacherId);
+  const teacher = await teacherForm.findById(teacherId);
+  res.json(teacher);
+  // db.db("form").collection("teachers").updateOne(myquery, newvalues, function(err, res) {
+  //   if (err) throw err;
+  //   console.log("1 document updated");
+  //   db.close();
+  // });
+
+});
+
+// app.post("/modifyRecord", async (req, res) => {
+//   const teacherId = req.body.teacherId;
+//   const teacher = await teacherForm.findById(teacherId);
+//   // console.log(teacher);
+//   res.json(teacher);
+//   // res.redirect("/registerTeacher");
+// });
 
 // Start the server
 app.listen(process.env.port, () => {

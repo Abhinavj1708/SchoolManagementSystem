@@ -113,6 +113,7 @@ app.post("/register", async (req, res) => {
     res.status(200).json({ message: "Email already exists" });
     return;
   }
+  
   user
     .save()
     .then(() => {
